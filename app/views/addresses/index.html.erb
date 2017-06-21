@@ -44,9 +44,6 @@
 </div>
 <div id="flash-message"></div>
 
-
-
-
 <div class="table-wrapper">
   <table class="coordinates-table light-border" id="coordinates-table">
     <tr>
@@ -60,5 +57,5 @@
     <% end %>
     
   </table>
+  <%= paginate @addresses %>
 </div>
-<%= paginate @addresses %>

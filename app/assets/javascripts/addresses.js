@@ -24,33 +24,27 @@ function submitAddress(e) {
   $.ajax({
     url: fullUrl,
     type: "GET",
+    timeout: 1000,
     success: function(data) {
       createAddress(data)
+    },
+    error: function(request, status) {
+      flashProblemConnecting()
+      hideLoading()
     }
   })
 }
 
 function createAddress(data) {
   hideLoading()
-  debugger
-  if (data.status == "ZERO_RESULTS") {
-    flashZero()
-  } else if (data.status == "OVER_QUERY_LIMIT") {
-    clearFields()
-    flashQueryLimit()
-  } else if (data.status == "REQUEST_DENIED") {
-    flashRequestDenied()
-  } else if (data.status == "INVALID_REQUEST") {
-    flashInvalid()
-  }
   
-  else {
-  var values = {
-    "address[formatted_address]": data.results[0].formatted_address,
-    "address[latitude]": data.results[0].geometry.location.lat,
-    "address[longitude]": data.results[0].geometry.location.lng
-  }
-    
+  if (data.status === "OK") {
+    var values = {
+      "address[formatted_address]": data.results[0].formatted_address,
+      "address[latitude]": data.results[0].geometry.location.lat,
+      "address[longitude]": data.results[0].geometry.location.lng
+    }
+      
     $.ajax({
       url: '/addresses/',
       type: "POST",
@@ -59,33 +53,18 @@ function createAddress(data) {
       success: function() {
         hideLoading()
       }
-    }).done(hideLoading).done(clearFields)
+    }).done(clearFields).done(flashSuccess)
+  } else if (data.status === "ZERO_RESULTS") {
+    flashZero()
+  } else if (data.status === "OVER_QUERY_LIMIT") {
+    flashQueryLimit()
+  } else if (data.status === "REQUEST_DENIED") {
+    flashRequestDenied()
+  } else {
+    flashUnknown()
   }
 }
 
-function flashZero() {
-  $('#flash-message').html("Sorry! There were no results for the address you entered. Try providing a little more information.").delay(500).fadeOut(1000, function() {
-    $(this).empty().show()
-  })
-}
-
-function flashQueryLimit() {
-  $('#flash-message').html("The daily quota for geocoding has been reached. Please try again tomorrow.").delay(500).fadeOut(1000, function() {
-    $(this).empty().show()
-  })
-}
-
-function flashRequestDenied() {
-  $('#flash-message').html("Your request was denied.").delay(500).fadeOut(1000, function() {
-    $(this).empty().show()
-  })
-}
-
-function flashInvalid() {
-  $('#flash-message').html("We need a bit more information to make that request. Try filling out more of the fields up top.").delay(500).fadeOut(1000, function() {
-    $(this).empty().show()
-  })
-}
 
 function showLoading() {
   $('#loading-bar').css({ "visibility": "visible"})
@@ -97,4 +76,43 @@ function hideLoading() {
 
 function clearFields() {
   document.getElementById("address-form").reset()
+}
+
+
+// FLASH MESSAGES FOR ALL STATUSES
+
+function flashSuccess() {
+  $('#flash-message').html("Your request was successfully added to the database below.").delay(800).fadeOut(1000, function() {
+    $(this).empty().show()
+  })
+}
+
+function flashZero() {
+  $('#flash-message').html("Sorry! There were no results for the address you entered. Try providing a little more information.").delay(800).fadeOut(1000, function() {
+    $(this).empty().show()
+  })
+}
+
+function flashQueryLimit() {
+  $('#flash-message').html("The daily quota for geocoding has been reached. Please try again tomorrow.").delay(800).fadeOut(1000, function() {
+    $(this).empty().show()
+  })
+}
+
+function flashProblemConnecting() {
+  $('#flash-message').html("There was a problem connecting to Google. Please check your internet connection and try again.").delay(800).fadeOut(1000, function() {
+    $(this).empty().show()
+  })
+}
+
+function flashRequestDenied() {
+  $('#flash-message').html("Your request was denied.").delay(800).fadeOut(1000, function() {
+    $(this).empty().show()
+  })
+}
+
+function flashUnknown() {
+  $('#flash-message').html("There was an unknown error. Please try again later.").delay(800).fadeOut(1000, function() {
+    $(this).empty().show()
+  })
 }

@@ -36,11 +36,14 @@ tr:nth-child(odd) {
 }
 
 .coordinates-table {
-  
   text-align: left;
   width: 700px;
   margin: 0 auto;
   margin-top: .75rem;
+}
+
+.table-wrapper {
+  margin-bottom: 2.5rem;
 }
 
 .img-wrapper {
