@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20170620165446) do
     t.string   "country"
     t.string   "postal_code"
     t.string   "formatted_address"
-    t.decimal  "latitude"
-    t.decimal  "longitude"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end

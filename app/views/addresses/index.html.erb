@@ -1,0 +1,48 @@
+<h1>Rails Geocoding App</h1>
+<p>Please enter an address to get the corrosponding latitude and longitude</p>
+
+<div class="form-block-wrapper light-border">
+  <div class="form-wrapper inline-block">
+    <%= form_for :address do |f| %>
+
+      <p>
+        <label>Street Address:</label>
+        <%= f.text_field :street_address, class: "m1"  %>
+      </p>
+
+      <p>
+        <label>City:</label>
+        <%= f.text_field :locality, class: "m1" %>
+      </p>
+
+      <p>
+        <label>State/Region:</label>
+        <%= f.text_field :region, class: "m1" %>
+      </p>
+
+      <p>
+        <label>Postal Code:</label>
+        <%= f.text_field :postal_code, class: "m1" %>
+      </p>
+
+        <%= f.submit "Get Coordinates", class: "m1 btn", id: "address-submit" %>
+    <% end %>
+  </div>
+
+  <div class="img-wrapper m1 inline-block">
+    <%= image_tag 'google-map-icon.jpg', alt: "Google Maps Icon", class: "img-rounded" %>
+  </div>
+</div>
+  
+
+
+<table class="coordinates-table light-border" id="coordinates-table">
+  <tr>
+    <th>Address</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+  </tr>
+  <% @addresses.each do |address| %>
+    <%= render partial: 'address_row', locals: {address: address} %>
+  <% end %>
+</table>
