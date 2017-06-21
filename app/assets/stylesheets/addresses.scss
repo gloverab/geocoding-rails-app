@@ -11,6 +11,11 @@ h1 {
   font-family: 'Cabin', sans-serif;
 }
 
+thead tr th {
+  border-bottom: 1px solid #ededed;
+  font-weight: bold;
+}
+
 tr:nth-child(even) {
   background: #ededed
 }

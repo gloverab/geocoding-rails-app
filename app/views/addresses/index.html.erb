@@ -46,16 +46,20 @@
 
 <div class="table-wrapper">
   <table class="coordinates-table light-border" id="coordinates-table">
-    <tr>
-      <th>Address</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
-    </tr>
+  
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+      </tr>
+    </thead>
     
-    <% @addresses.each do |address| %>
-      <%= render partial: 'address_row', locals: {address: address} %>
-    <% end %>
-    
+    <tbody>
+      <% @addresses.each do |address| %>
+        <%= render partial: 'address_row', locals: {address: address} %>
+      <% end %>
+    </tbody>
   </table>
   <%= paginate @addresses %>
 </div>

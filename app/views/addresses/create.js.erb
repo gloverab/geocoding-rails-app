@@ -1,1 +1,1 @@
-$('#coordinates-table').append("<%= j render(:partial => 'addresses/address_row', locals: {address: @address}) %>")
+$('#coordinates-table tbody').prepend("<%= j render(:partial => 'addresses/address_row', locals: {address: @address}) %>")

@@ -1,7 +1,7 @@
 class AddressesController < ApplicationController
 
   def index
-    @addresses = Address.order(created_at: :asc).page(params[:page])
+    @addresses = Address.order(created_at: :desc).page(params[:page])
   end
 
   def create
