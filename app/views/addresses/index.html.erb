@@ -42,15 +42,17 @@
   <div class="bullet"></div>
   <div class="bullet"></div>
 </div>
+<div id="flash-message"></div>
 
-
-<table class="coordinates-table light-border" id="coordinates-table">
-  <tr>
-    <th>Address</th>
-    <th>Latitude</th>
-    <th>Longitude</th>
-  </tr>
-  <% @addresses.each do |address| %>
-    <%= render partial: 'address_row', locals: {address: address} %>
-  <% end %>
-</table>
+<div class="table-wrapper">
+  <table class="coordinates-table light-border" id="coordinates-table">
+    <tr>
+      <th>Address</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+    </tr>
+    <% @addresses.each do |address| %>
+      <%= render partial: 'address_row', locals: {address: address} %>
+    <% end %>
+  </table>
+</div>

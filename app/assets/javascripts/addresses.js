@@ -32,21 +32,31 @@ function submitAddress(e) {
 
 function createAddress(data) {
 
-  var values = {
-    "address[formatted_address]": data.results[0].formatted_address,
-    "address[latitude]": data.results[0].geometry.location.lat,
-    "address[longitude]": data.results[0].geometry.location.lng
-  }
   
-  $.ajax({
-    url: '/addresses/',
-    type: "POST",
-    data: values,
-    dataType: 'script',
-    success: function() {
-      hideLoading()
+
+  if (data.status == "ZERO_RESULTS") {
+    hideLoading()
+    clearFields()
+    $('#flash-message').html("Sorry! That address couldn't be found").delay(500).fadeOut(1000, function() {
+      $(this).empty().show()
+    })
+  } else {
+    var values = {
+      "address[formatted_address]": data.results[0].formatted_address,
+      "address[latitude]": data.results[0].geometry.location.lat,
+      "address[longitude]": data.results[0].geometry.location.lng
     }
-  }).done(hideLoading).done(clearFields)
+    
+    $.ajax({
+      url: '/addresses/',
+      type: "POST",
+      data: values,
+      dataType: 'script',
+      success: function() {
+        hideLoading()
+      }
+    }).done(hideLoading).done(clearFields)
+  }
 }
 
 function flashSuccess() {
