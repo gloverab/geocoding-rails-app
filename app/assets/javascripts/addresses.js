@@ -10,6 +10,7 @@ function attachListeners() {
 
 function submitAddress(e) {
   e.preventDefault()
+  showLoading()
 
   var rootUrl = "https://maps.googleapis.com/maps/api/geocode/json?address="
   var serializedFormArr = $('form').serialize().split('%5D=')
@@ -42,12 +43,20 @@ function createAddress(data) {
     type: "POST",
     data: values,
     dataType: 'script',
-    success: function(e) {
-      flashSuccess(e)
+    success: function() {
+      hideLoading()
     }
   })
 }
 
 function flashSuccess() {
 
+}
+
+function showLoading() {
+  $('#loading-bar').css({ "visibility": "visible"})
+}
+
+function hideLoading() {
+  $('#loading-bar').css({ "visibility": "hidden"})
 }
