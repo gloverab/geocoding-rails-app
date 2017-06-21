@@ -46,7 +46,7 @@ function createAddress(data) {
     success: function() {
       hideLoading()
     }
-  })
+  }).done(hideLoading).done(clearFields)
 }
 
 function flashSuccess() {
@@ -59,4 +59,8 @@ function showLoading() {
 
 function hideLoading() {
   $('#loading-bar').css({ "visibility": "hidden"})
+}
+
+function clearFields() {
+  document.getElementById("address-form").reset()
 }
