@@ -20,6 +20,15 @@ tr:nth-child(odd) {
   background: #FFF
 }
 
+a {
+  text-decoration: none;
+  color: #4DA0DB;
+}
+
+a:hover {
+  color: #41789c;
+}
+
 .form-block-wrapper {
   margin: 0 auto;
   padding: .5rem;
@@ -40,6 +49,7 @@ tr:nth-child(odd) {
   width: 700px;
   margin: 0 auto;
   margin-top: .75rem;
+  margin-bottom: .75rem;
 }
 
 .table-wrapper {
