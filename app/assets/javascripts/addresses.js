@@ -53,7 +53,7 @@ function createAddress(data) {
       success: function() {
         hideLoading()
       }
-    }).done(clearFields).done(flashSuccess).done(flashNewest)
+    }).done(clearFields).done(flashSuccess)
   } else if (data.status === "ZERO_RESULTS") {
     flashZero()
   } else if (data.status === "OVER_QUERY_LIMIT") {
@@ -76,14 +76,6 @@ function hideLoading() {
 function clearFields() {
   document.getElementById("address-form").reset()
 }
-
-function flashNewest() {
-  $('#address-table, tr:eq(1)').velocity({
-    backgroundColor: ['#ffffff', '#bee2fa'],
-    opacity: 1
-  },900, 'ease-in-out')
-}
-
 
 // FLASH MESSAGES FOR ALL STATUSES
 
