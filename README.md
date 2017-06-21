@@ -1,24 +1,5 @@
-# README
+# Rails Geocoder
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## About
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This is a simple web app that allows a user to input an address and geocode it using the Google geocoding API. If it successfully geocodes the location, the latitude and longitude get stored in a database table, along with the formatted address, at the bottom of the page.
