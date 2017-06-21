@@ -1,4 +1,4 @@
-$(document).on('ready', function() {
+$(document).on('turbolinks:load', function() {
   attachListeners()
 })
 
@@ -31,21 +31,25 @@ function submitAddress(e) {
 }
 
 function createAddress(data) {
-
-  
-
+  hideLoading()
+  debugger
   if (data.status == "ZERO_RESULTS") {
-    hideLoading()
+    flashZero()
+  } else if (data.status == "OVER_QUERY_LIMIT") {
     clearFields()
-    $('#flash-message').html("Sorry! That address couldn't be found").delay(500).fadeOut(1000, function() {
-      $(this).empty().show()
-    })
-  } else {
-    var values = {
-      "address[formatted_address]": data.results[0].formatted_address,
-      "address[latitude]": data.results[0].geometry.location.lat,
-      "address[longitude]": data.results[0].geometry.location.lng
-    }
+    flashQueryLimit()
+  } else if (data.status == "REQUEST_DENIED") {
+    flashRequestDenied()
+  } else if (data.status == "INVALID_REQUEST") {
+    flashInvalid()
+  }
+  
+  else {
+  var values = {
+    "address[formatted_address]": data.results[0].formatted_address,
+    "address[latitude]": data.results[0].geometry.location.lat,
+    "address[longitude]": data.results[0].geometry.location.lng
+  }
     
     $.ajax({
       url: '/addresses/',
@@ -59,8 +63,28 @@ function createAddress(data) {
   }
 }
 
-function flashSuccess() {
+function flashZero() {
+  $('#flash-message').html("Sorry! There were no results for the address you entered. Try providing a little more information.").delay(500).fadeOut(1000, function() {
+    $(this).empty().show()
+  })
+}
 
+function flashQueryLimit() {
+  $('#flash-message').html("The daily quota for geocoding has been reached. Please try again tomorrow.").delay(500).fadeOut(1000, function() {
+    $(this).empty().show()
+  })
+}
+
+function flashRequestDenied() {
+  $('#flash-message').html("Your request was denied.").delay(500).fadeOut(1000, function() {
+    $(this).empty().show()
+  })
+}
+
+function flashInvalid() {
+  $('#flash-message').html("We need a bit more information to make that request. Try filling out more of the fields up top.").delay(500).fadeOut(1000, function() {
+    $(this).empty().show()
+  })
 }
 
 function showLoading() {

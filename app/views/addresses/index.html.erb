@@ -44,6 +44,9 @@
 </div>
 <div id="flash-message"></div>
 
+
+
+
 <div class="table-wrapper">
   <table class="coordinates-table light-border" id="coordinates-table">
     <tr>
@@ -51,8 +54,11 @@
       <th>Latitude</th>
       <th>Longitude</th>
     </tr>
+    
     <% @addresses.each do |address| %>
       <%= render partial: 'address_row', locals: {address: address} %>
     <% end %>
+    
   </table>
 </div>
+<%= paginate @addresses %>

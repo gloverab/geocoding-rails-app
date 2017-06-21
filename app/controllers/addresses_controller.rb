@@ -1,9 +1,7 @@
-require 'pry'
-
 class AddressesController < ApplicationController
 
   def index
-    @addresses = Address.all
+    @addresses = Address.order(created_at: :asc).page(params[:page])
   end
 
   def create
@@ -15,6 +13,11 @@ class AddressesController < ApplicationController
         format.js
       end
     end
+  end
+
+  def destroy
+    address = Address.find(params[:id])
+    address.destroy
   end
 
   private
