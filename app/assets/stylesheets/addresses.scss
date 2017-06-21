@@ -2,9 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
-// Global styles
-
 body {
   font-family: 'Open Sans', sans-serif;
   text-align: center;
@@ -12,6 +9,14 @@ body {
 
 h1 {
   font-family: 'Cabin', sans-serif;
+}
+
+tr:nth-child(even) {
+  background: #ededed
+}
+
+tr:nth-child(odd) {
+  background: #FFF
 }
 
 .form-block-wrapper {
@@ -29,8 +34,10 @@ h1 {
   text-align: left;
   width: 700px;
   margin: 0 auto;
-  margin-top: .5rem;
+  margin-top: .75rem;
 }
+
+
 
 .img-wrapper {
   width: 144px;
