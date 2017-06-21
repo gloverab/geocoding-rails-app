@@ -13,7 +13,7 @@ function submitAddress(e) {
   showLoading()
 
   var rootUrl = "https://maps.googleapis.com/maps/api/geocode/json?address="
-  var serializedFormArr = $('form').serialize().split('%5D=')
+  var serializedFormArr = $('#address-form').serialize().split('%5D=')
   var streetAddress = serializedFormArr[1].split('&')[0]
   var addressLocality = serializedFormArr[2].split('&')[0] || ''
   var addressRegion = serializedFormArr[3].split('&')[0] || ''
