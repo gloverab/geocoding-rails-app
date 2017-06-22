@@ -19,7 +19,7 @@ function submitAddress(e) {
   var addressRegion = serializedFormArr[3].split('&')[0] || ''
   var postalCode = serializedFormArr[4].split('&')[0] || ''
 
-  var fullUrl = rootUrl + streetAddress + ",+" + addressLocality + ",+" + addressRegion + ",+" + postalCode + "&key=" + "AIzaSyAPxDo80fkkeup137csDYbswPzUCA636J0"
+  var fullUrl = rootUrl + streetAddress + ",+" + addressLocality + ",+" + addressRegion + ",+" + postalCode + "&key=" + "<%= ENV['google_geocode_api_key'] %>"
 
   $.ajax({
     url: fullUrl,
